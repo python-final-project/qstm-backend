@@ -26,6 +26,15 @@ class UserTest(TestCase):
         self.assertEqual(self.user.user_username, 'Debugger')
         self.assertIsNotNone(self.user.password)
         self.assertNotEqual(self.user.password, 'foobar')
+    
+    def test_unique_user(self):
+        try:
+            duplicate_user = User.objects.create(
+                user_username = 'Debugger',
+                password = 'random',  
+            )
+        except IntegrityError:
+            pass
 
 class ParentTest(TestCase):
 
@@ -34,6 +43,14 @@ class ParentTest(TestCase):
 
         self.user = User.objects.create(
             user_username = 'Debugger_Parent',
+            password = 'uncommon',
+            is_parent = True,
+            last_login = True,
+            is_active = True,
+        )
+
+        self.user2 = User.objects.create(
+            user_username = 'Random_Parent',
             password = 'uncommon',
             is_parent = True,
             last_login = True,
@@ -50,6 +67,18 @@ class ParentTest(TestCase):
     def test_creation(self):
         self.assertIsInstance(self.parent, Parent)
         self.assertEqual(self.parent.email, 'debugger@email.com')
+
+    def test_unique_email(self):
+        try:
+            duplicate_email = Parent.objects.create(
+                user_id = self.user2,
+                email = 'debugger@email.com',
+                name = 'Random Parent',
+                cellphone = 1234567890,
+            )
+        
+        except IntegrityError:
+            pass
 
 class StudentTest(TestCase):
 
