@@ -65,7 +65,7 @@ class StudentTest(TestCase):
         )
 
         self.parent_user = User.objects.create(
-            user_username = 'Debugger_Student',
+            user_username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -103,7 +103,7 @@ class TaskTest(TestCase):
         )
 
         self.parent_user = User.objects.create(
-            user_username = 'Debugger_Student',
+            user_username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -147,7 +147,7 @@ class SiteTest(TestCase):
         )
 
         self.parent_user = User.objects.create(
-            user_username = 'Debugger_Student',
+            user_username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
             last_login = True,

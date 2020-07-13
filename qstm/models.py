@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 class User(models.Model):
     user_id     = models.AutoField(primary_key=True)    
-    user_username   = models.CharField(max_length=30, unique=False)
+    user_username   = models.CharField(max_length=30, unique=True)
     password    = models.CharField(max_length=30, unique=False)
     is_parent   = models.BooleanField(default=True)
     last_login  = models.DateField(auto_now=True)
