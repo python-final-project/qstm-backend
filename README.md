@@ -36,9 +36,3 @@ This project is under the MIT License.
 - 1.0.0 20200708
   - Initial backend files were created 20200713  
 
-
----
-
-## Software Requirements  
-
-[Link to Software Requirements](requirements.md)  
