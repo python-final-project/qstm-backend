@@ -57,10 +57,12 @@ INSTALLED_APPS = [
     #3rd Party
     'rest_framework',
     'corsheaders',
+    'django_filters',
 
     # Local Apps
     'qstm.apps.QstmConfig',
 ]
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -159,3 +161,9 @@ CORS_ORIGIN_REGEX_WHITELIST = [
     r"^http://localhost:3000$",
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',     
+    ),
+}

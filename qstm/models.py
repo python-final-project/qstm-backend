@@ -2,18 +2,18 @@ from django.db import models
 from datetime import datetime, timedelta
 
 class User(models.Model):
-    user_id     = models.AutoField(primary_key=True)    
-    user_username   = models.CharField(max_length=30, unique=True)
+    id     = models.AutoField(primary_key=True)    
+    account_name   = models.CharField(max_length=30, unique=True)
     password    = models.CharField(max_length=30, unique=False)
     is_parent   = models.BooleanField(default=True)
     last_login  = models.DateField(auto_now=True)
     is_active   = models.BooleanField(default=True)
     
     def __str__(self):
-      return self.user_username
+      return self.account_name
 
 class Parent(models.Model):
-    parent_id     = models.AutoField(primary_key=True)    
+    id     = models.AutoField(primary_key=True)    
     user_id       = models.ForeignKey(User, on_delete=models.CASCADE)
     email         = models.EmailField(max_length=60, unique=True, blank=True, null=True)
     name          = models.CharField(max_length=60, unique=False)
@@ -23,7 +23,7 @@ class Parent(models.Model):
       return self.name
 
 class Student(models.Model):
-    student_id    = models.AutoField(primary_key=True)    
+    id    = models.AutoField(primary_key=True)    
     user_id       = models.ForeignKey(User, on_delete=models.CASCADE)
     parent_id     = models.ForeignKey(Parent, on_delete=models.CASCADE)
     name          = models.CharField(max_length=60, unique=False)
@@ -46,7 +46,7 @@ class Task(models.Model):
         ('L', 'Low'),
     )
 
-    task_id         = models.AutoField(primary_key=True)    
+    id         = models.AutoField(primary_key=True)    
     student_id      = models.ForeignKey(Student, on_delete=models.CASCADE)
     date_created  	= models.DateField(auto_now=True)
     due_date        = models.DateField(default=get_due_date)
@@ -60,11 +60,11 @@ class Task(models.Model):
       return self.class_topic
 
 class Site(models.Model):
-    site_id         = models.AutoField(primary_key=True)    
+    id         = models.AutoField(primary_key=True)    
     student_id      = models.ForeignKey(Student, on_delete=models.CASCADE)
-    site_url        = models.CharField(max_length=2083, blank=False, null=False)
-    site_username   = models.CharField(max_length=100, blank=False, null=False)
-    site_password   = models.CharField(max_length=100, blank=False, null=False)
+    url        = models.CharField(max_length=2083, blank=False, null=False)
+    account   = models.CharField(max_length=100, blank=False, null=False)
+    password   = models.CharField(max_length=100, blank=False, null=False)
     class_topic     = models.CharField(max_length=100, blank=False, null=False)
 
     

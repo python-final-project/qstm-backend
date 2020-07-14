@@ -14,7 +14,7 @@ class UserTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(
-            user_username = 'Debugger',
+            account_name = 'Debugger',
             password = 'uncommon',
             is_parent = True,
             last_login = True,
@@ -23,14 +23,14 @@ class UserTest(TestCase):
 
     def test_creation(self):
         self.assertIsInstance(self.user, User)
-        self.assertEqual(self.user.user_username, 'Debugger')
+        self.assertEqual(self.user.account_name, 'Debugger')
         self.assertIsNotNone(self.user.password)
         self.assertNotEqual(self.user.password, 'foobar')
     
     def test_unique_user(self):
         try:
             duplicate_user = User.objects.create(
-                user_username = 'Debugger',
+                account_name = 'Debugger',
                 password = 'random',  
             )
         except IntegrityError:
@@ -42,7 +42,7 @@ class ParentTest(TestCase):
     def setUp(self):
 
         self.user = User.objects.create(
-            user_username = 'Debugger_Parent',
+            account_name = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = True,
             last_login = True,
@@ -50,7 +50,7 @@ class ParentTest(TestCase):
         )
 
         self.user2 = User.objects.create(
-            user_username = 'Random_Parent',
+            account_name = 'Random_Parent',
             password = 'uncommon',
             is_parent = True,
             last_login = True,
@@ -86,7 +86,7 @@ class StudentTest(TestCase):
     def setUp(self):
 
         self.student_user = User.objects.create(
-            user_username = 'Debugger_Student',
+            account_name = 'Debugger_Student',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -94,7 +94,7 @@ class StudentTest(TestCase):
         )
 
         self.parent_user = User.objects.create(
-            user_username = 'Debugger_Parent',
+            account_name = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -124,7 +124,7 @@ class TaskTest(TestCase):
     def setUp(self):
 
         self.student_user = User.objects.create(
-            user_username = 'Debugger_Student',
+            account_name = 'Debugger_Student',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -132,7 +132,7 @@ class TaskTest(TestCase):
         )
 
         self.parent_user = User.objects.create(
-            user_username = 'Debugger_Parent',
+            account_name = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -168,7 +168,7 @@ class SiteTest(TestCase):
     def setUp(self):
 
         self.student_user = User.objects.create(
-            user_username = 'Debugger_Student',
+            account_name = 'Debugger_Student',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -176,7 +176,7 @@ class SiteTest(TestCase):
         )
 
         self.parent_user = User.objects.create(
-            user_username = 'Debugger_Parent',
+            account_name = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
             last_login = True,
@@ -198,14 +198,14 @@ class SiteTest(TestCase):
 
         self.site = Site.objects.create(
             student_id = self.student,
-            site_url = 'codefellows.org',
-            site_username = 'debugger-codefellows',
-            site_password = 'uncommon-coder',
+            url = 'codefellows.org',
+            account = 'debugger-codefellows',
+            password = 'uncommon-coder',
             class_topic = 'Math',
         )
 
     def test_creation(self):
         self.assertIsInstance(self.site, Site)
-        self.assertEqual(self.site.site_url, 'codefellows.org')
+        self.assertEqual(self.site.url, 'codefellows.org')
         self.assertEqual(self.site.student_id.name, 'Bob Debugger')
         self.assertEqual(self.site.student_id.parent_id.name, 'Debug_Student Parent')

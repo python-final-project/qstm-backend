@@ -19,9 +19,13 @@ from .serializers import (
     SiteSerializer,
 )
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 class UserListView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['account_name', 'password']
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
