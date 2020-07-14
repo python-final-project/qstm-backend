@@ -35,6 +35,8 @@ class UserDetailView(RetrieveUpdateDestroyAPIView):
 class ParentListView(ListCreateAPIView):
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['email', 'cellphone']
 
 class ParentDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Parent.objects.all()
@@ -44,6 +46,8 @@ class ParentDetailView(RetrieveUpdateDestroyAPIView):
 class StudentListView(ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['parent_id']
 
 class StudentDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
@@ -53,6 +57,8 @@ class StudentDetailView(RetrieveUpdateDestroyAPIView):
 class TaskListView(ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['student_id', 'date_created', 'due_date', 'priority', 'completed', 'date_completed']
 
 class TaskDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
@@ -62,6 +68,8 @@ class TaskDetailView(RetrieveUpdateDestroyAPIView):
 class SiteListView(ListCreateAPIView):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['student_id']
 
 class SiteDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Site.objects.all()
