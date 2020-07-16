@@ -2,39 +2,39 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 from .models import (
-    User,
+    # User,
     Parent,
     Student,
     Task,
     Site,
 )
 
-class UserTest(TestCase):
+# class UserTest(TestCase):
 
 
-    def setUp(self):
-        self.user = User.objects.create(
-            account_name = 'Debugger',
-            password = 'uncommon',
-            is_parent = True,
-            last_login = True,
-            is_active = True,
-        )
+#     def setUp(self):
+#         self.user = User.objects.create(
+#             account_name = 'Debugger',
+#             password = 'uncommon',
+#             is_parent = True,
+#             last_login = True,
+#             is_active = True,
+#         )
 
-    def test_creation(self):
-        self.assertIsInstance(self.user, User)
-        self.assertEqual(self.user.account_name, 'Debugger')
-        self.assertIsNotNone(self.user.password)
-        self.assertNotEqual(self.user.password, 'foobar')
+#     def test_creation(self):
+#         self.assertIsInstance(self.user, User)
+#         self.assertEqual(self.user.account_name, 'Debugger')
+#         self.assertIsNotNone(self.user.password)
+#         self.assertNotEqual(self.user.password, 'foobar')
     
-    def test_unique_user(self):
-        try:
-            duplicate_user = User.objects.create(
-                account_name = 'Debugger',
-                password = 'random',  
-            )
-        except IntegrityError:
-            pass
+#     def test_unique_user(self):
+#         try:
+#             duplicate_user = User.objects.create(
+#                 account_name = 'Debugger',
+#                 password = 'random',  
+#             )
+#         except IntegrityError:
+#             pass
 
 class ParentTest(TestCase):
 

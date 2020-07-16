@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import User, Parent, Student, Task, Site
+from .models import CustomUser, Parent, Student, Task, Site
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = CustomUser
         fields = '__all__'
 
 
