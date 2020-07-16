@@ -1,20 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from datetime import datetime, timedelta
 
-class User(models.Model):
-    id     = models.AutoField(primary_key=True)    
-    account_name   = models.CharField(max_length=30, unique=True)
-    password    = models.CharField(max_length=30, unique=False)
+class CustomUser(AbstractUser):
+    # id     = models.AutoField(primary_key=True)    
+    # account_name   = models.CharField(max_length=30, unique=True)
+    # password    = models.CharField(max_length=30, unique=False)
     is_parent   = models.BooleanField(default=True)
-    last_login  = models.DateField(auto_now=True)
-    is_active   = models.BooleanField(default=True)
+    # last_login  = models.DateField(auto_now=True)
+    # is_active   = models.BooleanField(default=True)
     
     def __str__(self):
-      return self.account_name
+      return self.username
 
 class Parent(models.Model):
     id     = models.AutoField(primary_key=True)    
-    user_id       = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id       = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     email         = models.EmailField(max_length=60, unique=True, blank=True, null=True)
     name          = models.CharField(max_length=60, unique=False)
     cellphone     = models.CharField(max_length=12, blank=True, null=True)
@@ -24,7 +25,7 @@ class Parent(models.Model):
 
 class Student(models.Model):
     id    = models.AutoField(primary_key=True)    
-    user_id       = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id       = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     parent_id     = models.ForeignKey(Parent, on_delete=models.CASCADE)
     name          = models.CharField(max_length=60, unique=False)
 
@@ -67,5 +68,6 @@ class Site(models.Model):
     password   = models.CharField(max_length=100, blank=False, null=False)
     class_topic     = models.CharField(max_length=100, blank=False, null=False)
 
-    
+    def __str__(self):
+      return self.class_topic
     

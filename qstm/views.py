@@ -4,7 +4,8 @@ from rest_framework.generics import (
 )
 
 from .models import (
-    User,
+    # User,
+    CustomUser,
     Parent,
     Student,
     Task,
@@ -22,13 +23,13 @@ from .serializers import (
 from django_filters.rest_framework import DjangoFilterBackend
 
 class UserListView(ListCreateAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['account_name', 'password']
+    filterset_fields = ['username', 'password']
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 
@@ -46,8 +47,8 @@ class ParentDetailView(RetrieveUpdateDestroyAPIView):
 class StudentListView(ListCreateAPIView):
     # queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['parent_id']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['user_id']
     def get_queryset(self):
         """
         This view should return a list students
