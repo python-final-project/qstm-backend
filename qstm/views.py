@@ -25,8 +25,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 class UserListView(ListCreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['account_name', 'password']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username', 'password']
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
@@ -47,8 +47,8 @@ class ParentDetailView(RetrieveUpdateDestroyAPIView):
 class StudentListView(ListCreateAPIView):
     # queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['parent_id']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['user_id']
     def get_queryset(self):
         """
         This view should return a list students

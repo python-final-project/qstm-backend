@@ -3,58 +3,53 @@ from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 from .models import (
     # User,
+    CustomUser,
     Parent,
     Student,
     Task,
     Site,
 )
 
-# class UserTest(TestCase):
+class UserTest(TestCase):
 
 
-#     def setUp(self):
-#         self.user = User.objects.create(
-#             account_name = 'Debugger',
-#             password = 'uncommon',
-#             is_parent = True,
-#             last_login = True,
-#             is_active = True,
-#         )
+    def setUp(self):
+        self.user = CustomUser.objects.create(
+            username = 'Debugger',
+            password = 'uncommon',
+            is_parent = True,
+        )
 
-#     def test_creation(self):
-#         self.assertIsInstance(self.user, User)
-#         self.assertEqual(self.user.account_name, 'Debugger')
-#         self.assertIsNotNone(self.user.password)
-#         self.assertNotEqual(self.user.password, 'foobar')
+    def test_creation(self):
+        self.assertIsInstance(self.user, CustomUser)
+        self.assertEqual(self.user.username, 'Debugger')
+        self.assertIsNotNone(self.user.password)
+        self.assertNotEqual(self.user.password, 'foobar')
     
-#     def test_unique_user(self):
-#         try:
-#             duplicate_user = User.objects.create(
-#                 account_name = 'Debugger',
-#                 password = 'random',  
-#             )
-#         except IntegrityError:
-#             pass
+    def test_unique_user(self):
+        try:
+            duplicate_user = CustomUser.objects.create(
+                username = 'Debugger',
+                password = 'random',  
+            )
+        except IntegrityError:
+            pass
 
 class ParentTest(TestCase):
 
 
     def setUp(self):
 
-        self.user = User.objects.create(
-            account_name = 'Debugger_Parent',
+        self.user = CustomUser.objects.create(
+            username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = True,
-            last_login = True,
-            is_active = True,
         )
 
-        self.user2 = User.objects.create(
-            account_name = 'Random_Parent',
+        self.user2 = CustomUser.objects.create(
+            username = 'Random_Parent',
             password = 'uncommon',
             is_parent = True,
-            last_login = True,
-            is_active = True,
         )
 
         self.parent = Parent.objects.create(
@@ -85,20 +80,16 @@ class StudentTest(TestCase):
 
     def setUp(self):
 
-        self.student_user = User.objects.create(
-            account_name = 'Debugger_Student',
+        self.student_user = CustomUser.objects.create(
+            username = 'Debugger_Student',
             password = 'uncommon',
             is_parent = False,
-            last_login = True,
-            is_active = True,
         )
 
-        self.parent_user = User.objects.create(
-            account_name = 'Debugger_Parent',
+        self.parent_user = CustomUser.objects.create(
+            username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
-            last_login = True,
-            is_active = True,
         )
 
         self.parent = Parent.objects.create(
@@ -123,20 +114,16 @@ class TaskTest(TestCase):
 
     def setUp(self):
 
-        self.student_user = User.objects.create(
-            account_name = 'Debugger_Student',
+        self.student_user = CustomUser.objects.create(
+            username = 'Debugger_Student',
             password = 'uncommon',
             is_parent = False,
-            last_login = True,
-            is_active = True,
         )
 
-        self.parent_user = User.objects.create(
-            account_name = 'Debugger_Parent',
+        self.parent_user = CustomUser.objects.create(
+            username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
-            last_login = True,
-            is_active = True,
         )
 
         self.parent = Parent.objects.create(
@@ -165,22 +152,19 @@ class TaskTest(TestCase):
         self.assertEqual(self.task.completed, False)
 
 class SiteTest(TestCase):
+
     def setUp(self):
 
-        self.student_user = User.objects.create(
-            account_name = 'Debugger_Student',
+        self.student_user = CustomUser.objects.create(
+            username = 'Debugger_Student',
             password = 'uncommon',
             is_parent = False,
-            last_login = True,
-            is_active = True,
         )
 
-        self.parent_user = User.objects.create(
-            account_name = 'Debugger_Parent',
+        self.parent_user = CustomUser.objects.create(
+            username = 'Debugger_Parent',
             password = 'uncommon',
             is_parent = False,
-            last_login = True,
-            is_active = True,
         )
 
         self.parent = Parent.objects.create(
