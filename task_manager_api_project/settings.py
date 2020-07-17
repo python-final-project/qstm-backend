@@ -171,6 +171,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://qstm-frontend.vercel.app",
     "http://ec2-18-191-129-83.us-east-2.compute.amazonaws.com",
+    "http://ec2-18-191-129-83.us-east-2.compute.amazonaws.com:3000",
 ]
 
 CORS_ORIGIN_REGEX_WHITELIST = [
