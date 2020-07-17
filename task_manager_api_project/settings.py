@@ -169,10 +169,14 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://qstm-frontend.vercel.app",
+    "http://ec2-18-191-129-83.us-east-2.compute.amazonaws.com",
 ]
 
 CORS_ORIGIN_REGEX_WHITELIST = [
     r"^http://localhost:3000$",
+    r"^https://qstm-frontend.\w+\.vercel.app$",
+    r"^http://ec2-18-191-129-83.us-east-2.compute.amazonaws.com$",
 
 ]
 
